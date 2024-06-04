@@ -1,0 +1,377 @@
+.body_color {
+    background : #487154;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+	height: 90vh;
+    width: 100%;
+}
+
+.content {
+    flex: 1;
+}
+
+.content_wrapper {
+    width: 100%;
+    max-width: 1920px;
+    min-width: 1450px;
+    margin: 0 auto;
+    padding: 40px 70px 0;
+    box-sizing: border-box;
+}
+
+.text {
+    color: #FFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display : flex;
+    margin-bottom : 20px;
+}
+
+.container2 {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 68px;
+}
+
+.profile_box {
+    width: 540px;
+    height: 374px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    display: flex;
+}
+
+.profile_img {
+    margin-top: 46px;
+    margin-left : 46px;
+}
+
+.nameblock {
+    display : flex;
+    flex-direction: column;
+    margin-left : 50px;
+    margin-top : 65px;
+}
+
+.name_text, .username_text {
+    color: #B8B8B8;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left : 0px;
+    margin-bottom : 7px;
+}
+
+.name {
+    color: #31302F;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+}
+
+.username_block {
+    display : flex;
+    flex-direction: column;
+}
+
+.username {
+    color: #31302F;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+}
+
+.edit_profile {
+    width: 192px;
+    height: 51px;
+    flex-shrink: 0;
+    background-color: white;
+    border: 1px solid #B8B8B8;
+    color: #31302F;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 15px;
+
+    margin-top : 280px;
+    margin-left : -360px;
+    cursor: pointer;
+}
+
+.see_profile {
+    width: 192px;
+    height: 51px;
+    flex-shrink: 0;
+    background-color: white;
+    border: 1px solid #B8B8B8;
+    color: #31302F;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 15px;
+
+    margin-top : 280px;
+    margin-left : 30px;
+    cursor: pointer;
+}
+
+.book_box {
+    flex: 1;
+    height: 616px;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+}
+
+.level_box {
+    width: 540px;
+    height: 200px;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    margin-top : 40px;
+    display: flex;
+}
+
+.level {
+    margin-top: 5px;
+    margin-left : 30px;
+
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 20px;
+    color: #B8B8B8
+}
+
+.level_text {
+    margin-top: 0;
+    margin-bottom : -5px;
+    font-size: 25px;
+    color : black;
+    display : flex;
+    align-items: center;
+}
+
+.level_text h2 {
+    margin-top : 28px;
+    font-weight: 700;
+}
+
+.level_bar {
+    margin-top: 35px;
+}
+
+.level_bar p {
+    margin-bottom : 10px;
+}
+
+.circle {
+    width: 50px; /* 원의 지름 설정 */
+    height: 50px;
+    border-radius: 50%; /* 원 모양 */
+    background-color: black; /* 배경색 설정 */
+    margin-right: 20px; /* 텍스트와 원 사이 간격 조절 */
+    margin-top : 20px;
+    text-align : center;
+    font-size: 20px;
+    color:white;
+    line-height: 0px;
+}
+
+.study {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cp {
+    margin-top: 80px;
+    margin-left: 70px;
+}
+
+.cp:hover, .cpb:hover, .cpbtn:hover {
+    cursor:pointer;
+}
+
+.cp2 {
+    margin-top : 50px;
+    margin-left: 70px;
+}
+
+.cpb {
+    margin-top: -40px;
+}
+
+.cpbtn {
+    margin-left: -10px;
+    width: 144px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: white;
+    border: 2px solid #B8B8B8;
+    flex-shrink: 0;
+    color: #31302F;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.board2 {
+    width: 100%;
+    height: 20px;
+    background-color: #9D6338;
+    right: 0;
+    min-width: 1450px;
+}
+
+.modal_container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal_content {
+    background-color: white;
+    border-radius: 10px;
+    width: 400px;
+    height: 300px;
+    display : flex;
+    flex-direction: column;
+}
+
+.modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom : -33px;
+    background-color: #487154;
+    height : 40px;
+}
+
+.modal_header p {
+    margin-left : 15px;
+    font-weight: 700;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    color : white;
+}
+
+.closebtn {
+    background-color: #487154;
+    border: 1px solid #487154;
+    font-size : 20px;
+    margin-right: 10px;
+    color : white;
+    cursor: pointer;
+}
+
+.modalinputWrap {
+    display : flex;
+    justify-content: center;
+    padding : 50px;
+    margin-top : 10px;
+    margin-bottom : -15px;
+}
+
+.inputname {
+    margin-right: 20px;
+}
+
+.inputname p {
+    color: #434443;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom : 5px;
+}
+
+.inputusername p {
+    color: #434443;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom : 5px;
+}
+
+.input_name {
+    height : 30px;
+    background-color: white;
+    border: 1px solid #e2e0e0;
+}
+
+.profileWrap {
+    display : flex;
+    margin-left : 23px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profileWrap p {
+    color: #434443;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom : 20px;
+}
+
+.profile_content {
+    display : flex;
+    align-items: center;
+}
+
+.profileimg {
+    margin-right: 30px;
+}
+
+.chooseimgbtn {
+    width: 120px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #e2e0e0;
+    cursor: pointer;
+    font-family: "GMARKETSNASTTF-MEDIUM";
+}
+
+.save {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+}
+
+.savebtn {
+    width : 80px;
+    height : 30px;
+    background-color: #487154;
+    border: 1px solid #487154;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    border-radius: 5px;
+}
+

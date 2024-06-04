@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@common/*": [
+                "./src/common/*"
+            ],
+            "@user/*": [
+                "./src/user/*"
+            ],
+            "@auth/*": [
+                "./src/auth/*"
+            ],
+            "@category/*": [
+                "./src/category/*"
+            ],
+            "@problem/*": [
+                "./src/problem/*"
+            ],
+            "@submission/*": [
+                "./src/submission/*"
+            ],
+            "@testcase/*": [
+                "./src/testcase/*"
+            ],
+            "@root/*": [
+                "./src/*"
+            ],
+        }
+    }
+}

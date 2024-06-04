@@ -1,0 +1,67 @@
+/*NotoSansKR*/
+@font-face {
+    font-family: 'NotoSansKR-Thin-1';
+    src: url('@/assets/css/fonts/Noto_Sans_KR/NotoSansKR-Thin.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-ExtraLight-2';
+    src: url('@/assets/css/fonts/Noto_Sans_KR/NotoSansKR-ExtraLight.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Light-3';
+    src: url('@/assets/css/fonts/Noto_Sans_KR/NotoSansKR-Light.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Regular-4';
+    src: url('@/assets/css/fonts/Noto_Sans_KR/NotoSansKR-Regular.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Medium-5';
+    src: url('@/assets/css/fonts/Noto_Sans_KR/NotoSansKR-Medium.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-SemiBold-6';
+    src: url('@/assets/css/fonts/Noto_Sans_KR/NotoSansKR-SemiBold.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-Bold-7';
+    src: url('@/assets/css/fonts/Noto_Sans_KR/NotoSansKR-Bold.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'NotoSansKR-ExtraBold-8';
+    src: url('@/assets/css/fonts/Noto_Sans_KR/NotoSansKR-ExtraBold.ttf') format('truetype');
+    font-display: block;
+}
+
+/*G마켓_Sans_TTF*/
+@font-face {
+    font-family: 'GMARKETSNASTTF-BOLD';
+    src: url('@/assets/css/fonts/G마켓_Sans_TTF/GmarketSansTTFBold.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'GMARKETSNASTTF-LIGHT';
+    src: url('@/assets/css/fonts/G마켓_Sans_TTF/GmarketSansTTFLight.ttf') format('truetype');
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'GMARKETSNASTTF-MEDIUM';
+    src: url('@/assets/css/fonts/G마켓_Sans_TTF/GmarketSansTTFMedium.ttf') format('truetype');
+    font-display: block;
+}

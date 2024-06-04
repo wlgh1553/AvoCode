@@ -1,0 +1,25 @@
+.container{
+    display: inline-block;
+    padding: 20px;
+}
+
+table {
+    border-collapse: collapse !important;
+    flex-wrap: nowrap !important;
+    width: 317px !important;
+}
+
+caption{
+    font-family: 'NotoSansKR-SemiBold-6', serif !important;
+    font-size: 1.2rem !important;
+    margin-bottom: 5px !important;
+}
+
+th, td {
+    border: 1px solid black !important;
+    padding: 8px !important;
+    text-align: center !important;
+}
+th {
+    background-color: #f2f2f2 !important;
+}

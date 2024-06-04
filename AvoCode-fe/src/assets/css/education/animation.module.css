@@ -1,0 +1,236 @@
+/*modal component*/
+.container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    width: 85%;
+    height: 85%;
+    position: absolute;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #477155;
+    color: white;
+    padding: 10px 20px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    display: flex;
+
+    color: #ffffff;
+}
+
+.close-button {
+    font-weight: 700;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.close-button:hover {
+    color: #1e1e1e;
+}
+
+.body {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 60px);
+}
+
+/*code container*/
+.code-container {
+    background-color: #e7e9eb;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+}
+
+.code-block {
+    height: calc(100% - 35px);
+    overflow: auto;
+}
+
+.code {
+    padding: 10px;
+    overflow: auto;
+    font-family: monospace;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.exec-line {
+    color: red;
+}
+
+.button-block {
+    display: flex;
+    justify-content: center;
+}
+
+.exec-button {
+    width: 50px;
+    height: 30px;
+
+    background: #5aa773;
+    border-radius: 5px;
+}
+
+/*animation container component*/
+.animation-container {
+    flex: 2;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.animation-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter';
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.global-container {
+    background-color: #5aa773;
+    display: flex;
+}
+
+.local-container {
+    background-color: antiquewhite;
+    display: flex;
+}
+
+.args-container {
+    background-color: darksalmon;
+    display: flex;
+}
+
+.variable-area-name {
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 600;
+    margin: 5px;
+}
+
+/*avocado component*/
+.seed {
+    position: absolute;
+    top: 40%;
+    left: 27%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 100%;
+}
+
+.seed-value {
+    color: bisque;
+    width: 50px;
+    height: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.avocado {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 105px;
+    margin: 5px;
+}
+
+.avocado-name {
+    position: absolute;
+    top: 0px; /* 아보카도 이미지 위에 위치하도록 조정 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: black; /* 필요한 경우 색상 변경 */
+}
+
+.avo-image {
+    width: 100px;
+    z-index: 1;
+}
+
+.avocado-container {
+    display: flex;
+    justify-content: space-around;
+
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.avocado-array-conatiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3px;
+    padding: 3px;
+}
+
+.array-row {
+    display: flex;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.array-name {
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/*temp*/
+.temp {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.send-button {
+    height: 100px;
+    background: #8ecaa1;
+    border-radius: 5px;
+}

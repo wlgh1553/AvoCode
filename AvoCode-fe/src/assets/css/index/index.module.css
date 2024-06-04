@@ -1,0 +1,60 @@
+.container {
+    width: 100%;
+    height: calc(100% - 50px);
+    padding: 0.03px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    background: #cee6d5;
+}
+
+.explain-box {
+    width: 45%;
+    text-align: left;
+}
+
+.explain-1 {
+    font-size: 3rem;
+    color: #31302f;
+    text-shadow: 2px 2px 2px #b4b4b4;
+    font-family: 'NotoSansKR-Bold-7', serif;
+}
+
+.explain-2 {
+    font-size: 1.2rem;
+    color: #31302f;
+    font-family: 'NotoSansKR-Regular-4', serif;
+}
+
+.move-main {
+    font-size: 3rem;
+    color: #31302f;
+    text-shadow: 2px 2px 2px #b4b4b4;
+    font-family: 'NotoSansKR-Bold-7', serif;
+    cursor: pointer;
+}
+
+.intro-character-box {
+    z-index: 1;
+}
+
+.intro-character-box img {
+    display: block;
+    width: 40vw;
+    z-index: 1;
+}
+
+.background-ground {
+    z-index: 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.background-ground img {
+    z-index: 0;
+    display: block;
+    width: 100%;
+    bottom: 0;
+}

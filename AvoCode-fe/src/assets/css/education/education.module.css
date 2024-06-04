@@ -1,0 +1,343 @@
+.container {
+    position: relative;
+    min-width: 1280px;
+    width: 100%;
+    height: calc(100% - 100px);
+}
+
+.container-items {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.container-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    flex: 0 0;
+    position: relative;
+    height: 100%;
+}
+
+/*education { */
+.education-container {
+    flex-basis: 530px;
+    background: #ffffff;
+    overflow-y: auto;
+}
+
+.education-title {
+    width: 100%;
+    background: #f1f0f0;
+}
+
+.education-title p {
+    font-family: "NotoSansKR-Medium-5", serif;
+    color: #909090;
+    font-size: 15px;
+    margin: 0;
+    padding: 5px 0px 5px 20px;
+}
+
+.materials-tab-cont{
+    background-color: #efefef;
+}
+
+.materials-tab{
+    display: flex;
+}
+
+.materials-tab li{
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 1rem 1.5rem;
+}
+
+.materials-tab li.active{
+    background-color: #fff;
+}
+
+.materials-box {
+    width: 100%;
+    /*min-height: 280px;*/
+    box-sizing: border-box;
+    padding: 1.25rem 1.75rem;
+}
+
+.materials-box div:nth-child(1){
+    display: none;
+}
+
+.materials-box div:nth-child(1).active{
+    display: block;
+}
+
+.submission-record-box{
+    display: none;
+    width: 100%;
+}
+
+.submission-record-box.active{
+    display: block;
+}
+
+.submission-record-box table{
+    width: 100%;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.submission-record-box table th{
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    background-color: #eaeaea;
+}
+
+.submission-record-box table td{
+    padding: 0.75rem;
+    border: 1px solid #efefef;
+    cursor: pointer;
+}
+
+.submission-record-box button{
+    
+}
+
+.materials-title {
+    font-family: "NotoSansKR-Medium-5", serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 17px;
+    margin-bottom: 20px;
+    border-top: 2px solid #B8B8B8;
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.materials-explain-box {
+    width: 100%;
+    color: #333333;
+    margin: 0 auto;
+    padding: 0 25px;
+    padding-bottom: 40px;
+    box-sizing: border-box;
+}
+
+.materials-explain {
+    font-size: .975rem;
+    line-height: 1.5em;
+}
+
+.materials-explain h3{
+    font-size: 1.08rem !important;
+}
+
+.materials-explain p {
+    margin: 0;
+}
+
+/*} education end */
+
+/*editor { */
+.editor-container {
+    display: flex;
+    flex-basis: auto;
+    flex: 1 1; 
+    width: calc(100% - 530px);
+    background: #242524;
+}
+
+.editor-box{
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 220px);
+    border-top: 1px solid #000;
+}
+
+.editor-oper{
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    margin: 0; padding: 0;
+}
+
+.editor-oper li{
+    height: 100%;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.editor-language-list{
+
+}
+
+.editor-language{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 67px;
+    border-top : 2px solid #8eaa6d;
+    background-color: #1e1e1e;
+    font-size: 0.9rem;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.editor-btn-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.editor-btn-list button{
+    margin-right: 5px;
+}
+
+.editor-wrap{
+    flex-basis: auto;
+    height: calc(100% - 40px);
+    padding-top: 5px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    background-color: #1e1e1e;
+}
+
+.terminal-box{
+    height: 220px;
+}
+
+.terminal-oper{
+    display: flex;
+    height: 40px;
+    margin: 0; padding: 0;
+}
+
+.terminal-oper-item{
+
+}
+
+.terminal-oper-item a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: .5rem 1.5rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    color: #fff;
+    background-color: #262924;
+    border-right: 1px solid #000;
+    border-top: 2px solid #8eaa6d;
+    box-sizing: border-box;
+}
+
+.terminal-wrap{
+    background-color: #262924;
+    padding: 1rem;
+    height: calc(100% - 40px);
+    box-sizing: border-box;
+    border: 1px solid #000;
+}
+
+.terminal-wrap ::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+}
+.terminal-wrap ::-webkit-scrollbar-thumb {
+    border-radius: .25rem;
+    background-color: rgba(177, 180, 193, .7);
+}
+.terminal-wrap ::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+}
+.editor {
+    font-size: 2rem;
+}
+/*} editor end */
+
+/*gpt { */
+.gpt-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0px;
+    height: 100%;
+    z-index: 99;
+    transition:0.3s all;
+}
+
+.gpt-container.active{
+    width: 390px;
+}
+
+.gpt-contents {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}
+/*} gpt end */
+
+/* common */
+.container-item-btn{
+    position: absolute;
+    top: 50%;
+    transform: translate(-100%, -100%);
+}
+
+.container-item-btn.rotateR{
+    transform: rotate(-90deg);
+}
+
+.container-item-btn .item-btn-area{
+    position: relative;
+    width: 24px;
+    height: 62px;
+    background-color: #e7e8ef;
+    border-right: 1px solid #e7e8ef;
+    cursor: pointer;
+}
+
+.container-item-btn .item-btn-area::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: -8px;
+    background: #e7e8ef;
+    border-bottom: none;
+    border-right: 1px solid #e7e8ef;
+    border-radius: 3px 0px 0 0px;
+    transform: skew(0deg, -20deg);
+}
+
+
+.container-item-btn .item-btn-area::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: -8px;
+    background: #e7e8ef;
+    border-bottom: none;
+    border-right: 1px solid #e7e8ef;
+    border-radius: 0px 0px 0 3px;
+    transform: skew(0deg, 20deg);
+}
+
+
+
+

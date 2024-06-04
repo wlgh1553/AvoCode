@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 1280px;
+    height: 10vh;
+    background: #2f332c;
+}
+
+.nav {
+   background-color: #ffffff;
+}
+
+.nav_wrapper{
+    margin: 0 auto;
+    padding: 0 70px;
+    height : 10vh;
+    display: flex;
+    background: #FFF;
+    flex-grow: 1;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.logo_img {
+    padding-top : 15px;
+}
+
+.mypage {
+    padding-top : 10px;
+}
