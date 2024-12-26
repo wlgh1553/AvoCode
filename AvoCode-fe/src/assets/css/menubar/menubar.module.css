@@ -12,21 +12,26 @@
    background-color: #ffffff;
 }
 
-.nav_wrapper{
+.nav-wrapper{
     margin: 0 auto;
     padding: 0 70px;
-    height : 10vh;
+    height : 70px;
     display: flex;
     background: #FFF;
     flex-grow: 1;
     box-sizing: border-box;
     justify-content: space-between;
+    align-items: center;
 }
 
-.logo_img {
-    padding-top : 15px;
+.logo-container {
+}
+
+.logo-container img {
+    height: 40px;
 }
 
 .mypage {
-    padding-top : 10px;
+    height: 40px;
+    cursor: pointer;
 }

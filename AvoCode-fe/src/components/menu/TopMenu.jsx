@@ -1,27 +1,54 @@
-import styles from '@/assets/css/menubar/menubar.module.css'
+import styles from '@/assets/css/menubar/menubar.module.css';
 
-import logo from '@/assets/images/dashboard/avocode-logo.png'
-import mypage from '@/assets/images/dashboard/mypage-img.png'
+import logo from '@/assets/images/dashboard/avocode-logo.png';
+import mypage from '@/assets/images/dashboard/mypage-img.png';
+import { useState, useEffect } from 'react';
 
-import logoText from '@/assets/images/logo/text-logo.png'
-
-import userLogo from '@/assets/images/menubar/user-logo.svg'
-import { useNavigate } from 'react-router-dom'
+import requestApi from '@/plugins/api-setting';
+import { useNavigate } from 'react-router-dom';
 
 function TopMenu() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [isLoggedIn, setLoggedIn] = useState(true);
+
+    useEffect(() => {
+        requestApi.get('auth/profile')
+            .then((data) => {
+                setLoggedIn(true);
+            }).catch((error) => {
+        });
+    }, []);
+
+    useEffect(() => {
+        // 추가적인 isLoggedIn 상태 변화에 따른 로직을 추가할 수 있습니다.
+    }, [isLoggedIn]);
+
+    const logout = () => {
+        document.cookie = 'token=a';
+        setLoggedIn(false);
+        navigate('/');
+    };
+
     return (
-        <div className={`${styles.nav}`}>
-            <div className={`${styles.nav_wrapper}`}>
-                <div className={`${styles.logo_img}`}>
-                    <img className={`${styles.logo}`} src={logo} alt="logo" />
+        <div className={`${styles['nav']}`}>
+            <div className={`${styles['nav-wrapper']}`}>
+                <div className={`${styles['logo-container']}`}>
+                    <img src={logo} alt="logo" />
                 </div>
-                <div className={`${styles.mypage_img}`}>
-                    <img className={`${styles.mypage}`} src={mypage} alt="mypage" />
-                </div>
+
+                {
+                    !isLoggedIn ?
+                        <></>
+                        :
+                        <>
+                            <div className={`${styles['mypage-img']}`}>
+                                <img className={`${styles['mypage']}`} src={mypage} alt="mypage" onClick={logout} />
+                            </div>
+                        </>
+                }
             </div>
         </div>
-    )
+    );
 }
-// 로그인되어있을때랑... 안되어있을때... 예외처리 해주어야함.
-export default TopMenu
+
+export default TopMenu;

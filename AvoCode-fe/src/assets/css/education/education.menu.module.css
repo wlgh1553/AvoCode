@@ -1,0 +1,89 @@
+.menu-container{
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    background: #2f332c;
+}
+/* top */
+.top-menu-inner{
+    padding: 0 1.25rem;
+    height: 100%;
+    align-items: center;
+}
+
+.lecture-list-btn{
+    cursor: pointer;
+}
+
+.lecture-title{
+    flex: 1;
+    font-size: 0.9rem;
+    padding-left: 1.5rem;
+}
+
+.user-info{
+    position: relative;
+}
+
+.user-info-btn{
+    cursor: pointer;
+}
+
+.user-info-btn span{
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+.user-info-box{
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    border-radius: 7px;
+    background-color: #fff;
+    font-size: 0.85rem;
+    color: #333;
+    z-index: 9999;
+    overflow: hidden;
+    padding-bottom: 0.25rem;
+}
+
+.user-info-box.active{
+    visibility: visible;
+}
+
+.user-info-title{
+    display: flex;
+    background-color: #efefef;
+    padding: 1rem 2.5rem 1rem 1.25rem;
+}
+
+.user-account{
+    margin-left: 0.5rem;
+}
+
+.user-account span{
+    display: inline-block;
+    margin-bottom: 0.25rem;
+}
+.user-account p{
+    font-size: 0.65rem;
+}
+
+.user-info-nav{
+    background-color: #ffffff;
+}
+
+.user-info-nav li{
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+}
+
+.user-info-nav li:hover{
+    background-color: #fafafa;
+}
+
+/* bottom */
+.bottom-menu-inner{
+
+}

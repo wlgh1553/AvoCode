@@ -1,11 +1,2 @@
-node_modules/
-
-package-lock.json
-
-example
-
-pointer
-
-a.out
-
-static
+node_modules
+.env

@@ -1,40 +1,35 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import styles from '@/assets/css/education/animation.module.css'
 import background from '@/assets/images/character/avocado/seed.png'
 
-const rotateMotion = {
+const rotateMotion = (rotateValue) => ({
     rotateSeed: {
-        rotate: 360
+        rotate: rotateValue
     },
     initialSeed: {
         rotate: 0
-    },
-    rotateAndMoveSeed: {
-        rotate: 360,
-        y: 0
     }
-}
+})
 
 function Seed({ seedValue, nowLine }) {
-    const [isClicked, setIsClicked] = useState(false)
+    const [rotateValue, setRotateValue] = useState(0)
 
-    const toggleClick = () => {
-        setIsClicked(!isClicked)
-    }
+    useEffect(() => {
+        // seedValue가 변경될 때마다 회전 각도를 증가시킴
+        setRotateValue((prevRotate) => prevRotate + 360)
+    }, [seedValue])
 
     return (
         <motion.div
             className={styles['seed']}
-            variants={rotateMotion}
+            variants={rotateMotion(rotateValue)}
             initial={nowLine ? { y: -10 } : { y: 0 }}
-            animate={nowLine ? 'rotateAndMoveSeed' : isClicked ? 'rotateSeed' : 'initialSeed'}
+            animate="rotateSeed"
             transition={{ type: 'spring', stiffness: 260 }}
             style={{
                 backgroundImage: `url(${background})`
             }}
-            onClick={toggleClick}
         >
             <div className={styles['seed-value']}>{seedValue}</div>
         </motion.div>

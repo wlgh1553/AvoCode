@@ -4,17 +4,9 @@ import Seed from './Seed'
 import { motion } from 'framer-motion'
 import Avocado from './Avocado'
 
-function AnimationContainer({ debugStart, isLoading, execPoint, execRecord, globalVariables }) {
-    if (isLoading) {
+function AnimationContainer({ locals, args, isLoading, globalVariables }) {
+    if (isLoading)
         return <div className={`${styles['animation-container']} ${styles['animation-message']}`}>loading...</div>
-    }
-    if (!debugStart) {
-        return (
-            <div className={`${styles['animation-container']} ${styles['animation-message']}`}>
-                press debug start buttton!
-            </div>
-        )
-    }
 
     const isAddress = (value) => {
         const addressPattern = /^0x[0-9a-fA-F]+$/
@@ -31,10 +23,6 @@ function AnimationContainer({ debugStart, isLoading, execPoint, execRecord, glob
     const isArray = (variable) => {
         const arrayPattern = /^\{\s*(\{.*?\}|[^{}]*?)\s*\}$/
         return arrayPattern.test(variable.value)
-    }
-
-    const isStruct = (variable) => {
-        return false //TODO
     }
 
     const makeAvocado = (variable) => {
@@ -76,9 +64,6 @@ function AnimationContainer({ debugStart, isLoading, execPoint, execRecord, glob
                     {parsedArray.map((variable) => makeAvocado(variable))}
                 </motion.div>
             )
-        }
-        if (isStruct(variable)) {
-            return <div></div>
         }
         return (
             <Avocado key={variable.address}>
@@ -168,12 +153,8 @@ function AnimationContainer({ debugStart, isLoading, execPoint, execRecord, glob
     return (
         <div className={styles['animation-container']}>
             <div className={styles['global-container']}>{renderVariableSection(globalVariables, 'global')}</div>
-            <div className={styles['local-container']}>
-                {renderVariableSection(execRecord[execPoint].localsArray, 'local')}
-            </div>
-            <div className={styles['args-container']}>
-                {renderVariableSection(execRecord[execPoint].argsArray, 'args')}
-            </div>
+            <div className={styles['local-container']}>{renderVariableSection(locals, 'local')}</div>
+            <div className={styles['args-container']}>{renderVariableSection(args, 'args')}</div>
         </div>
     )
 }

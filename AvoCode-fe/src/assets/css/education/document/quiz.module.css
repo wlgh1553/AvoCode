@@ -1,0 +1,64 @@
+
+.lecture-quiz-box {
+    width: 100%;
+    max-width: 750px;
+    color: #333333;
+    margin: 0 auto;
+    padding: 0 25px;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+}
+
+.quiz-title {
+    font-family: "NotoSansKR-Medium-5", serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin: 0;
+    /* padding-top: 20px; */
+    padding-bottom: 17px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.quiz-option {
+    font-size: .9rem;
+    line-height: 1.8em;
+    padding: 1rem;
+    /* padding-bottom: 2.35rem; */
+}
+
+.quiz-option-detail {
+    display: flex;
+    padding: 0.5rem 0.35rem;
+    margin: 0;
+    border-radius: 0.35rem;
+    background-color: #fafafa;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.quiz-option-detail input{
+    cursor: pointer;
+}
+
+.quiz-option-detail em{
+    margin-right: 7px;
+}
+
+.quiz-option-detail label{
+    cursor: pointer;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.quiz-button-box{
+    display: flex;
+    padding:0 1rem;
+    justify-content: left;
+}
+
+.quiz-button-box button{
+    height: auto;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+}

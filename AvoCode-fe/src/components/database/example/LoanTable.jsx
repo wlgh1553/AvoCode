@@ -10,7 +10,7 @@ function LoanTable({ scale }) {
                     <tr>
                         <th>loan_number</th>
                         <th>branch_name</th>
-                        <th>Amount</th>
+                        <th>amount</th>
                     </tr>
                 </thead>
                 <tbody>

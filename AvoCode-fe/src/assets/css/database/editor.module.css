@@ -2,44 +2,69 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+
+.editor-button-container {
+    width: 100%;
+    text-align: center;
+}
+
+.editor-button-container button {
+    border: none;
+    border-radius: 6px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    margin: 4px;
+}
+
+.editor-button-container button:hover {
+    background: #d3d3d3;
 }
 
 .editor {
     display: block;
-    width: 70%;
+    width: calc(100% - 32px);
     height: 100%;
-    font-size: 1.5rem;
-    text-align: center;
-    padding: 5px 15px 5px 15px;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-    border: 1px solid #d5d5d5;
-    border-right: none;
+    min-height: 220px;
+    font-size: 1.2rem;
+    text-align: left;
+    padding: 15px;
+    line-height: 25px;
+    resize: none;
 }
 
-.container > div {
-    width: 37.6px;
-    height: 37.6px;
-    border: 1px solid #d5d5d5;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-    background: #d5d5d5;
+.run-button-container {
+    width: 130px;
+    height: 45px;
+    background: #5AA773;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
     cursor: pointer;
+    margin-top: 20px;
+    margin-left: auto;
 }
 
+.run-button-container p {
+    font-family: 'NotoSansKR-SemiBold-6', serif;
+    color: #ffffff;
+    margin-top: -3px;
+}
 
-.container > div > img {
-    width: 35px;
+.run-button-container img {
+    margin-left: 5px;
+    height: 20px;
     display: block;
+    filter: invert(100%);
 }
-.container > div:hover {
-    background: #a6a6a6;
-    border: 1px solid #a6a6a6;
+
+.run-button-container:hover {
+    background: #45b96a;
 }

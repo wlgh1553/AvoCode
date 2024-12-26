@@ -46,7 +46,7 @@ function SignUp() {
                 name: userName,
                 password: password
             }
-        ).then((data) => { navigate('/login'); }).catch((e) => { alert(e); });
+        ).then((data) => { navigate('/login'); }).catch((e) => { alert(e.response.data.message); });
     };
 
     useEffect(() => {

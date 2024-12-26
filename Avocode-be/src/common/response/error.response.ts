@@ -1,7 +1,7 @@
 import {
   BadRequestException,
   NotAcceptableException,
-  NotFoundException
+  NotFoundException,
 } from '@nestjs/common';
 
 export class ErrorType {
@@ -17,6 +17,9 @@ export class ErrorType {
   };
   public static CATEGORY_NOT_FOUND = () => {
     return new NotFoundException('해당 카테고리를 찾을 수 없습니다!');
+  };
+  public static LECTURE_NOT_FOUND = () => {
+    return new NotFoundException('해당 강의를 찾을 수 없습니다!');
   };
 
   public static ID_DUPLICATE = () => {

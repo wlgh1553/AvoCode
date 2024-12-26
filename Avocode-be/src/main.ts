@@ -1,8 +1,5 @@
 import { HttpExceptionFilter } from '@common/response/exception.interceptor';
-import {
-  ClassSerializerInterceptor,
-  ValidationPipe
-} from '@nestjs/common';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from '@root/app.module';
 import { useContainer } from 'class-validator';

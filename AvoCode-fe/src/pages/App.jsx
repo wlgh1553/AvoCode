@@ -1,13 +1,15 @@
 import { useState } from 'react'
 
 import Dashboard from '@/pages/dashboard/Dashboard.jsx'
-import Algebra_2 from '@/pages/database/algebra/Algebra_2.jsx'
+import Algebra from '@/pages/database/algebra/Algebra.jsx'
 import Education from '@/pages/education/Education.jsx'
+import Document from '@/pages/education/Document.jsx'
 import Intro from '@/pages/index/Intro.jsx'
 import MainRouter from '@/pages/index/MainRouter.jsx'
 import Login from '@/pages/login/Login.jsx'
 import SignUp from '@/pages/login/SignUp.jsx'
 import { Route, Routes } from 'react-router-dom'
+import Lecture from './lecture/Lecture'
 
 function App() {
     const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -25,9 +27,11 @@ function App() {
                 <Route path="/" element={<MainRouter />}>
                     <Route path="/" element={<Intro />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/education" element={<Education />} />
-                    <Route path="/database/algebra" element={<Algebra_2 />} />
+                    <Route path="/lecture/:category" element={<Lecture/>} />
+                    <Route path="/database/algebra" element={<Algebra />} />
                 </Route>
+                <Route path="/education/:problem_id" element={<Education />} />
+                <Route path="/document/:category_id/:chapter_name/:lecture_id" element={<Document />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
             </Routes>

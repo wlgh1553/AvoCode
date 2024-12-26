@@ -31,3 +31,8 @@ export enum TestCaseType {
   SAMPLE_TEST_CASE = 'SAMPLE',
   GRADING_TEST_CASE = 'GRADING',
 }
+
+export enum LectureType {
+  DOC = 'DOC',
+  CODE = 'CODE',
+}

@@ -4,6 +4,7 @@ import apple from '@/assets/images/login/apple.svg'
 import facebook from '@/assets/images/login/facebook.svg'
 import google from '@/assets/images/login/google.svg'
 import requestApi from '@/plugins/api-setting'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function Login() {
@@ -20,12 +21,19 @@ function Login() {
             let data = response.data.data;
 
             document.cookie = `token=${data.access_token}`;
-
             navigate('/dashboard');
-        }).catch((e) => {
-            navigate('/login');
-        });
+        }, (e) => { alert(e.response.data.message); navigate('/login'); });
     };
+
+    useEffect(() => {
+        requestApi.get('auth/profile')
+            .then((dataE) => {
+                if (data.ok)
+                    navigate('/dashboard');
+                else
+                throw new Error("ASDF")
+            }, (e) => { }).catch((e) => { });
+    }, []);
 
     return (
         <div className={styles['container']}>
@@ -37,7 +45,7 @@ function Login() {
                         <input name="id" type="text" placeholder="Enter email or user name" />
                         <input name="password" type="password" placeholder="Password " />
                     </div>
-                    <p className={styles['forgot-password']}>Forgor password?</p>
+                    <p className={styles['forgot-password']}>Forgot password?</p>
                     <button className={styles['login-button']} onClick={tryLogin}>Login</button>
                     <p className={styles['sign-up-message']} onClick={() => navigate('/signup')}>
                         sign up

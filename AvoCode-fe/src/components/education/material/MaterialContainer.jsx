@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import requestApi from '@/plugins/api-setting.js';
 import styles from '@/assets/css/education/education.module.css';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-function MaterialContainer(setEditorValue) {
+function MaterialContainer({ setEditorValue, problemId }) {
     //TODO : 나중에 받아와서 사용하기!!
-    const problemId = 5;
-    const token = "";
+    // const problemId = 13;
 
     const [TabActive, setTabActive] = useState(0);
     const [material, setMaterial] = useState(null);
@@ -21,63 +22,76 @@ function MaterialContainer(setEditorValue) {
     };
 
     useEffect(() => {
-        const fetchMaterial = async () => {
-            const url = `/problem/${problemId}`;
-
-            try {
-                const response = await requestApi.get(url, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+        requestApi.get(`/problem/${problemId}`)
+            .then(response => {
                 setMaterial(response.data.data);
                 setLoading(false);
-            } catch (err) {
-                setError(err);
+            })
+            .catch(error => {
+                setError(error);
                 setLoading(false);
-            }
-        };
-        fetchMaterial();
+            })
     }, []);
 
     const fetchSubmissions = async () => {
         setLoading(true);
         setError(null);
 
-        const url = `/submission/${problemId}`;
-
-        try {
-            const response = await requestApi.get(url, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
+        requestApi.get(`/submission/${problemId}`)
+            .then(response => {
+                setSubmissions(response.data.data);
+            })
+            .catch(err => {
+                setError(err);
+            })
+            .finally(() => {
+                setLoading(false);
             });
-            setSubmissions(response.data.data);
-        } catch (err) {
-            setError(err);
-        } finally {
-            setLoading(false);
-        }
     };
 
     const fetchSubmissionCode = async (submissionId) => {
-        const url = `/submission/code/${submissionId}`;
-        try {
-            const response = await requestApi.get(url, {
-                headers: {
-                    Authorization: `Bearer ${token}`
+        requestApi.get(`/submission/code/${submissionId}`)
+            .then(response => {
+                const code = response.data.data.code;
+                try {
+                    const decodedCode = decodeURIComponent(code);
+                    setEditorValue(decodedCode);
+                } catch (e) {
+                    console.error("Failed to decode code. Using raw code.", e);
+                    setEditorValue(code);
                 }
-            });
-            const code = response.data.data.code;
-            console.log('code !!! ', code);
-            const decodedCode = decodeURIComponent(escape(atob(code)));
-            console.log(decoded, code);
-            setEditorValue(decodedCode);
-        } catch (err) {
-            setError(err);
-        }
+            })
+            .catch(err => {
+                setError(err);
+            })
     };
+    const formatContent = (content) => {
+        const blocks = content.split('```');
+        return blocks.map((block, index) => {
+            if (index % 2 === 1) {  // 코드 블록
+                const lines = block.split('\n');
+                const language = lines[0] || 'text';
+                const code = lines.slice(1).join('\n');
 
+                return (
+                    <SyntaxHighlighter
+                        key={index}
+                        language={language}
+                        style={materialDark}
+                        className={styles['code-block']}
+                    >
+                        {code}
+                    </SyntaxHighlighter>
+                );
+            } else {  // 일반 텍스트
+                return (
+                    <span key={index} style={{ whiteSpace: 'pre-line' }}>
+                    {block}
+                </span>
+                );
+            }
+        });
+    };
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -98,43 +112,44 @@ function MaterialContainer(setEditorValue) {
                 <div className={`${styles['submission-record-box']} ${TabActive === 1 ? styles["active"] : ""}`}>
                     <table>
                         <thead>
-                            <tr>
-                                <th>제출 일시</th>
-                                <th>제출 언어</th>
-                                <th>채점 내역</th>
-                            </tr>
+                        <tr>
+                            <th>제출 일시</th>
+                            <th>제출 언어</th>
+                            <th>채점 내역</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {submissions.map((d, idx) => (
-                                <tr key={idx} onClick={() => {
-                                    if (window.confirm(d.created_at  + " id " + d.id + " 코드를 불러오겠습니까?")) {
-                                        fetchSubmissionCode(d.id);
-                                    }
-                                }}>
-                                    <td>{d.created_at}</td>
-                                    <td>{d.language}</td>
-                                    <td>{d.result}</td>
-                                </tr>
-                            ))}
+                        {submissions.map((d, idx) => (
+                            <tr key={idx} onClick={() => {
+                                const result = window.confirm(d.created_at  + " id " + d.id + " 코드를 불러오겠습니까?");
+                                if(result){
+                                    fetchSubmissionCode(d.id);
+                                }
+                            }}>
+                                <td>{d.created_at}</td>
+                                <td>{d.language}</td>
+                                <td>{d.result}</td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>
             </div>
             {
-                !TabActive&& <div className={`${styles['materials-explain-box']}`}>
-                <p className={styles['materials-title']}>Ch.2 연산자</p>
-                <div className={styles['materials-explain']}>
-                    <p>{material.description}</p>
-                    {material.testcases.map((testcase, index) => (
-                        <div key={index}>
-                            <br />
-                            <p>{`TestCase : ${index + 1}`}</p>
-                            <p>Input: {testcase.input}</p>
-                            <p>Output: {testcase.output}</p>
-                        </div>
-                    ))}
+                !TabActive && <div className={`${styles['materials-explain-box']}`}>
+                    <p className={styles['materials-title']}>{material.title}</p>
+                    <div className={styles['materials-explain']}>
+                        <div>{formatContent(material.description)}</div>
+                        {material.testcases.map((testcase, index) => (
+                            <div key={index}>
+                                <br />
+                                <p>{`TestCase : ${index + 1}`}</p>
+                                <p style={{ whiteSpace: 'pre-line' }}>{`Input:\n${testcase.input}`}</p>
+                                <p style={{ whiteSpace: 'pre-line' }}>{`Output:\n${testcase.output}`}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
             }
         </div>
     );

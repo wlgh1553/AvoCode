@@ -1,5 +1,4 @@
 import { CategoryList } from '@common/enums';
-import { ResponseDto } from '@common/response/response.format';
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { ProblemService } from '@problem/problem.service';
 
@@ -8,18 +7,14 @@ export class ProblemController {
   constructor(private readonly problemService: ProblemService) {}
 
   @Get()
-  async getAll(
+  async getListUsingCategory(
     @Query('category') categoryName: CategoryList,
-  ): Promise<ResponseDto<any>> {
-    return new ResponseDto(
-      await this.problemService.findWithCategory(categoryName),
-    );
+  ): Promise<any> {
+    return await this.problemService.findWithCategory(categoryName);
   }
 
   @Get(':id')
-  async getOne(
-    @Param('id', ParseIntPipe) id: string,
-  ): Promise<ResponseDto<any>> {
-    return new ResponseDto(await this.problemService.findOneAndExamples(+id));
+  async getOne(@Param('id', ParseIntPipe) id: string): Promise<any> {
+    return await this.problemService.findOneAndExamples(+id);
   }
 }

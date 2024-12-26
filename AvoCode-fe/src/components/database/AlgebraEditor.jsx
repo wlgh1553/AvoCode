@@ -4,9 +4,13 @@ import { useEffect, useRef, useState } from 'react'
 
 import play from '@/assets/images/database/icon/play-fill.svg'
 import axios from 'axios'
+import requestApi, { algebraApi } from '@/plugins/api-setting.js'
 
-function AlgebraEditor({ result, setResult }) {
-    const [text, setText] = useState('')
+function AlgebraEditor({ result, setResult, setLoading }) {
+    const [text, setText] = useState('π_{borrower.customer_name, borrower.loan_number, loan.branch_name, loan.amount, depositor.account_number}\n' +
+        '(\n' +
+        '  (borrower ⨝ loan) ⨝ depositor\n' +
+        ')\n')
 
     const refInput = useRef(null)
 
@@ -14,17 +18,26 @@ function AlgebraEditor({ result, setResult }) {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await axios.get(`http://localhost:3000/algebra/getLoan`, {
+            await setResult([])
+            await setLoading(prev => true)
+            const response = await algebraApi.get(`/algebra`, {
                 params: { query: text }
             })
-            setResult(response.data.result)
+            // console.log(response)
+            await setLoading(prev => false)
 
-            console.log(response)
+            if (response.data.includes('wrong')) {
+                alert('잘못된 attribute 혹은 문법입니다.')
+                return
+            }
+            setResult(response.data)
         } catch (error) {
             console.error('Error fetching data:', error)
             setResult([])
+            await setLoading(prev => false)
         }
     }
+
     useEffect(() => {
         refInput.current.focus()
     }, [])
@@ -34,12 +47,19 @@ function AlgebraEditor({ result, setResult }) {
         const cursorPosition = inputText.selectionStart
 
         const newText = inputText.value
-            .replace(/\\sigma /g, 'σ')
+            .replace(/\\select /g, 'σ')
             .replace(/\\project /g, 'π')
             .replace(/\\union /g, '∪')
             .replace(/\\intersection /g, '∩')
-            .replace(/\\difference /g, 'ㅡ')
+            .replace(/\\difference /g, '−')
             .replace(/\\cartesian /g, '×')
+            .replace(/\\division /g, '÷')
+            .replace(/\\rename /g, 'ρ')
+            .replace(/\\join /g, '⋈')
+            .replace(/\\theta_join /g, '⋈θ')
+            .replace(/\\left_outer_join /g, '⟕')
+            .replace(/\\right_outer_join /g, '⟖')
+            .replace(/\\full_outer_join /g, '⟗')
 
         setText(newText)
 
@@ -91,19 +111,53 @@ function AlgebraEditor({ result, setResult }) {
         event.preventDefault() // 기본 입력 동작 방지
     }
 
+    const insertAlgebra = (algebra) => {
+        if (refInput.current) {
+            const textarea = refInput.current
+            const start = textarea.selectionStart
+            const end = textarea.selectionEnd
+            const before = text.substring(0, start)
+            const after = text.substring(end, text.length)
+
+            setText(before + algebra + after)
+
+            // 업데이트된 텍스트 길이만큼 커서 위치를 조정합니다.
+            setTimeout(() => {
+                textarea.selectionStart = textarea.selectionEnd = start + algebra.length
+                textarea.focus()
+            }, 0)
+        }
+    }
+
     return (
         <div className={styles['container']}>
-            <input
+            <div className={styles['editor-button-container']}>
+                <button onClick={() => insertAlgebra('σ')}>σ</button>
+                <button onClick={() => insertAlgebra('π')}>π</button>
+                <button onClick={() => insertAlgebra('∪')}>∪</button>
+                <button onClick={() => insertAlgebra('∩')}>∩</button>
+                <button onClick={() => insertAlgebra('−')}>−</button>
+                <button onClick={() => insertAlgebra('×')}>×</button>
+                <button onClick={() => insertAlgebra('÷')}>÷</button>
+                <button onClick={() => insertAlgebra('ρ')}>ρ</button>
+                <button onClick={() => insertAlgebra('⋈')}>⋈</button>
+                <button onClick={() => insertAlgebra('⋈θ')}>⋈θ</button>
+                <button onClick={() => insertAlgebra('⟕')}>⟕</button>
+                <button onClick={() => insertAlgebra('⟖')}>⟖</button>
+                <button onClick={() => insertAlgebra('⟗')}>⟗</button>
+            </div>
+            <textarea
                 ref={refInput}
                 className={styles['editor']}
                 value={text}
                 onChange={handleTextChange}
                 onKeyDown={handleKeyDown}
-            ></input>
-            <div>
-                <img src={play} alt="play" onClick={handleSubmit} />
-            </div>
+            ></textarea>
 
+            <div className={styles['run-button-container']} onClick={handleSubmit}>
+                <p>RUN SQL</p>
+                <img src={play} alt="play" />
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import styles from '@/assets/css/database/algebra_2.module.css'
+import styles from '@/assets/css/database/algebra.module.css'
 
 import plus from '@/assets/images/database/icon/add-circle-line.svg'
 import minus from '@/assets/images/database/icon/subtract-line.svg'

@@ -4,11 +4,7 @@ import Editor from '@monaco-editor/react'
 import WebTerminal from '@/components/terminal/Terminal.jsx'
 import requestApi from '@/plugins/api-setting.js'
 
-function EditorContainer({ onDebugClick, editorValue, setEditorValue, defaultCode }) {
-    //TODO
-    const token = "";
-    const problemId = 5;
-
+function EditorContainer({ onDebugClick, problemId, editorValue, setEditorValue, defaultCode }) {
     const [terminalValue, setTerminalValue] = useState('');
 
     const resetCode = () => {
@@ -24,17 +20,13 @@ function EditorContainer({ onDebugClick, editorValue, setEditorValue, defaultCod
 
         const url = '/submission/sample';
         const data = {
-            problem_id: problemId,
+            problem_id: +problemId,
             code: encodeURIComponent(editorValue),
             language: 75
         };
 
         try {
-            const response = await requestApi.post(url, data, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            const response = await requestApi.post(url, data);
 
             console.log("response", response.data);
 
@@ -73,17 +65,13 @@ function EditorContainer({ onDebugClick, editorValue, setEditorValue, defaultCod
 
         const url = '/submission';
         const data = {
-            problem_id: problemId,
+            problem_id: +problemId,
             code: encodeURIComponent(editorValue),
             language: 75
         };
 
         try {
-            const response = await requestApi.post(url, data, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            const response = await requestApi.post(url, data);
 
             console.log("response", response.data);
 
@@ -122,25 +110,24 @@ function EditorContainer({ onDebugClick, editorValue, setEditorValue, defaultCod
                         <button
                             type="button"
                             id="btn-init"
-                            class="btn btn-primary"
-                            onClick={resetCode}
-                        >
+                            className="btn btn-primary"
+                            onClick={resetCode}>
                             초기화
                         </button>
                         {/* <button type="button" id="btn-save" class="btn btn-primary">
                             저장
                         </button> */}
                         {/*저장 기능은 아직 백엔드에 만들어 지지 않았습니다..*/}
-                        <button type="button" id="btn-run" class="btn btn-primary" onClick={handleRunClick}>
+                        <button type="button" id="btn-run" className="btn btn-primary" onClick={handleRunClick}>
                             실행
                         </button>
-                        <button type="button" id="btn-submit" class="btn btn-success" onClick={handleSubmitClick}>
+                        <button type="button" id="btn-submit" className="btn btn-success" onClick={handleSubmitClick}>
                             제출
                         </button>
                         <button
                             type="button"
                             id="btn-debug"
-                            class="btn btn-success"
+                            className="btn btn-success"
                             onClick={() => onDebugClick(editorValue)}
                         >
                             디버그

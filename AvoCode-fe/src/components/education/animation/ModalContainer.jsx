@@ -1,166 +1,106 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@/assets/css/education/animation.module.css'
 import AnimationContainer from './AnimationContainer'
 import CodeContainer from './CodeContainer'
+import { requestGDBApi } from '@/plugins/api-setting.js'
 
 function ModalContainer({ isVisible, onClose, editorValue }) {
-    const debuggerServer = import.meta.env.VITE_DEBUGGER_URL
-
-    if (!isVisible) return null
-
-    const [debugStart, setDebugStart] = useState(false)
-    const [debugEnd, setDebugEnd] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    const [serverResponse, setServerResponse] = useState(null)
-    const [globalVariables, setGlobalVariables] = useState([])
-    const [sessionId, setSessionId] = useState(0)
-    const [execRecord, setExecRecord] = useState([]) // 지금까지 실행한 것들 (0번이 start_debug 결과)
-    const [execPoint, setExecPoint] = useState(-1) // execRecord에서 현재 실행중인 곳을 가리킴
+    //확실히 사용
+    const [sessionId, setSessionId] = useState(null)
+    const [debugLogs, setDebugLogs] = useState([])
+    const [execPoint, setExecPoint] = useState(0) // debugLogs에서 현재 실행중인 곳을 가리킴
     const [execLine, setExecLine] = useState(0)
+    const [locals, setLocals] = useState([])
+    const [args, setArgs] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    const [globalVariables, setGlobalVariables] = useState([]) //TODO : 추후 global 변수 추가할 수도 있음.
+
+    const increaseExecPoint = () => {
+        if (execPoint >= debugLogs.length - 1) return
+        setExecPoint((prevExecPoint) => prevExecPoint + 1)
+    }
+
+    const decreaseExecPoint = () => {
+        if (execPoint <= 0) return
+        setExecPoint((prevExecPoint) => prevExecPoint - 1)
+    }
+
+    useEffect(() => {
+        const execInfo = debugLogs[execPoint]
+        if (execInfo) {
+            setLocals(execInfo.locals || [])
+            setArgs(execInfo.args || [])
+            setExecLine(Number(execInfo.line))
+        }
+    }, [execPoint, debugLogs])
+
+    useEffect(() => {
+        manageDebugging()
+    }, [isVisible])
+
+    const manageDebugging = async () => {
+        if (isVisible) {
+            setIsLoading(true)
+            const sessionId = await uploadFileToServer()
+            setSessionId(sessionId)
+            saveDebuggedLogs(sessionId)
+            setIsLoading(false)
+        } else {
+            deleteDebuggedLogs(sessionId)
+            setSessionId(null)
+        }
+    }
 
     const uploadFileToServer = async () => {
-        // .c 파일 생성
-        const blob = new Blob([editorValue], { type: 'text/plain' })
-        const file = new File([blob], 'code.c', { type: 'text/plain' })
-
-        // FormData 객체에 파일 추가
-        const formData = new FormData()
-        formData.append('file', file)
-
         try {
-            const response = await fetch(`${debuggerServer}/upload`, {
-                method: 'POST',
-                body: formData
-            })
+            // .c 파일 생성
+            const blob = new Blob([editorValue], { type: 'text/plain' })
+            const file = new File([blob], 'code.c', { type: 'text/plain' })
 
-            if (response.ok) {
-                const result = await response.json()
-                console.log('File uploaded successfully', result)
-                setServerResponse(result.executable)
-                startDebug(result.executable)
+            // FormData 객체에 파일 추가
+            const formData = new FormData()
+            formData.append('file', file)
 
-                setIsLoading(true) // 로딩 상태 시작
-            } else {
-                console.error('File upload failed', response.statusText)
-                setServerResponse({ error: response.statusText })
-            }
+            const { data } = await requestGDBApi.post('/debugger', formData)
+            const { message, session_id } = data
+
+            return session_id // 성공 시 session_id 반환
         } catch (error) {
-            console.error('Error uploading file', error)
-            setServerResponse({ error: error.message })
-        }
-    }
-
-    const startDebug = async (executable) => {
-        try {
-            const response = await fetch(`${debuggerServer}/start_debug`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ executable: executable })
-            })
-
-            if (response.ok) {
-                const result = await response.json()
-                console.log('Debug started successfully', result)
-
-                setExecRecord([result])
-                setExecPoint(0)
-                setExecLine(+result.line)
-
-                setGlobalVariables(result.globals)
-                setSessionId(+result.session_id)
-
-                setServerResponse(result)
-
-                setIsLoading(false) // 로딩 상태 종료
-                setDebugStart(true)
+            if (error.response) {
+                // 서버가 400대 응답을 반환한 경우
+                console.error('Error:', error.response.status) // 상태 코드 (예: 400)
+                console.error('Message:', error.response.data.message) // 서버에서 보낸 메시지
+                window.alert(error.response.data.message || '파일 업로드 실패')
             } else {
-                console.error('Debug start failed', response.statusText)
-                setServerResponse({ error1: response.statusText })
-                setIsLoading(false) // 로딩 상태 종료
+                // 서버에 도달하지 못한 경우 또는 다른 네트워크 오류
+                console.error('Error:', error.message)
+                window.alert('파일 업로드 중 오류가 발생했습니다.')
             }
-        } catch (error) {
-            console.error('Error debug start', error)
-            setServerResponse({ error2: error.message })
-            setIsLoading(false) // 로딩 상태 종료
+            onClose() // 업로드 실패 시 모달 닫기
         }
     }
 
-    const debugNextLine = async () => {
-        try {
-            const globalNames = globalVariables ? globalVariables.map((e) => e.name) : []
+    const saveDebuggedLogs = async (sessionId) => {
+        const { status, data } = await requestGDBApi.get(`/debugger/${sessionId}`)
+        const { message, data: logs } = data
 
-            const response = await fetch(`${debuggerServer}/debug`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ session_id: sessionId, command: 'next', global_names: globalNames })
-            })
-
-            if (response.ok) {
-                const result = await response.json()
-                console.log('Debug next line successfully', result)
-                if (result.status === 'running') setExecRecord((prevExecRecord) => [...prevExecRecord, result])
-                return result // Return the result to use it in nextExecPoint
-            } else {
-                console.error('Debug next line failed', response.statusText)
-                setServerResponse({ error1: response.statusText })
-            }
-        } catch (error) {
-            console.error('Error debug next line', error)
-            setServerResponse({ error2: error.message })
+        if (status !== 200) {
+            console.error('Getting logs failed', message)
+            return
         }
+        setDebugLogs(logs)
     }
 
-    const updateGlobalVariables = (variables) => {
-        const updatedGlobals = globalVariables.map((e, idx) => ({
-            ...e,
-            value: variables[idx].value
-        }))
-        setGlobalVariables(updatedGlobals)
-    }
-
-    const nextExecPoint = async () => {
-        if (execPoint === execRecord.length - 1) {
-            if (debugEnd) {
-                return
-            }
-            const result = await debugNextLine()
-            if (!result) {
-                return
-            }
-            if (result.status !== 'running') {
-                setDebugEnd(true)
-                return
-            }
-            setExecPoint((prevExecPoint) => prevExecPoint + 1)
-            setExecLine(+result.line)
-            setServerResponse(result)
-            updateGlobalVariables(result.globals)
-        } else {
-            setExecPoint((prevExecPoint) => {
-                const newExecPoint = prevExecPoint + 1
-                setExecLine(+execRecord[newExecPoint].line)
-                setServerResponse(execRecord[newExecPoint])
-                return newExecPoint
-            })
-        }
-    }
-
-    const prevExecPoint = () => {
-        setExecPoint((prevExecPoint) => {
-            const newExecPoint = Math.max(prevExecPoint - 1, 0)
-            setExecLine(+execRecord[newExecPoint].line)
-            setServerResponse(execRecord[newExecPoint])
-            return newExecPoint
+    const deleteDebuggedLogs = async (sessionId) => {
+        if (!sessionId) return
+        const { status, data } = await requestGDBApi.delete('/debugger', {
+            data: { session_id: sessionId }
         })
     }
 
-    return (
+    return isVisible ? (
         <div className={styles['container']}>
-            <div className={styles['content']}>
+            <div className={styles['content']} onClick={(e) => e.stopPropagation()}>
                 <div className={styles['header']}>
                     <h4 className={styles['title']}>Animation Debugger</h4>
                     <button className={styles['close-button']} onClick={onClose}>
@@ -170,36 +110,20 @@ function ModalContainer({ isVisible, onClose, editorValue }) {
                 <div className={styles['body']}>
                     <CodeContainer
                         editorValue={editorValue}
-                        nextExecPoint={nextExecPoint}
-                        prevExecPoint={prevExecPoint}
+                        increaseExecPoint={increaseExecPoint}
+                        decreaseExecPoint={decreaseExecPoint}
                         execLine={execLine}
                     />
                     <AnimationContainer
-                        execPoint={execPoint}
-                        execRecord={execRecord}
+                        locals={locals}
+                        args={args}
                         globalVariables={globalVariables}
-                        debugStart={debugStart}
                         isLoading={isLoading}
                     />
-                    {!debugStart && (
-                        <div className={styles['temp']}>
-                            {!debugStart && (
-                                <button className={styles['send-button']} onClick={uploadFileToServer}>
-                                    DEBUG START
-                                </button>
-                            )}
-                            {!isLoading && serverResponse && (
-                                <div className={styles['response']}>
-                                    <h5>Server Response:</h5>
-                                    <pre>{JSON.stringify(serverResponse, null, 2)}</pre>
-                                </div>
-                            )}
-                        </div>
-                    )}
                 </div>
             </div>
         </div>
-    )
+    ) : null
 }
 
 export default ModalContainer

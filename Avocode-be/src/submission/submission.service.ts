@@ -2,7 +2,12 @@ import { CategoryService } from '@category/category.service';
 import compileAxiosInstance from '@common/axios/compile.instance';
 import { LanguageType, SolvedResultType, TestCaseType } from '@common/enums';
 import { ErrorType } from '@common/response/error.response';
-import { Inject, Injectable, InternalServerErrorException, forwardRef } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Problem } from '@problem/entities/problem.entity';
 import { ProblemService } from '@problem/problem.service';
@@ -25,7 +30,7 @@ export class SubmissionService {
 
     @Inject(forwardRef(() => CategoryService))
     private categoryService: CategoryService,
-  ) { }
+  ) {}
 
   public async findOneWithUser(id: number): Promise<Submission> {
     return await this.submissionRepository.findOne({
@@ -38,15 +43,15 @@ export class SubmissionService {
     return await this.submissionRepository.exists({
       where: {
         user: {
-          id: user_id
+          id: user_id,
         },
 
         problem: {
-          id: problem_id
+          id: problem_id,
         },
 
-        result: SolvedResultType.ACCEPTED
-      }
+        result: SolvedResultType.ACCEPTED,
+      },
     });
   }
 
@@ -69,21 +74,14 @@ export class SubmissionService {
     };
   }
 
-  public async getSubmissionsByUserUuid(userUuid: string): Promise<any> {
-    let user = await this.userService.findOneByUuid(userUuid);
-    if (!user) throw ErrorType.USER_NOT_FOUND();
-
-    return await this.submissionRepository.find({ where: { user: user } });
-  }
-
   public async getSubmissionsByProblem(
     userId: string,
     problemId: number,
   ): Promise<Submission[] | undefined> {
-    let user = await this.userService.findOne(userId);
+    const user = await this.userService.findOne(userId);
     if (!user) throw ErrorType.USER_NOT_FOUND();
 
-    let problem = await this.problemService.find(problemId);
+    const problem = await this.problemService.find(problemId);
     if (!problem) throw ErrorType.PROBLEM_NOT_FOUND();
 
     return await this.submissionRepository.find({
@@ -165,7 +163,7 @@ export class SubmissionService {
 
     let compileResult = null;
     let correctCnt = 0;
-    for (let testcase of testcases) {
+    for (const testcase of testcases) {
       console.log(testcase);
       compileResult = await this.getCompileResult(
         language,
@@ -197,7 +195,7 @@ export class SubmissionService {
     sourceCode: string,
     inputFile: string,
   ) {
-    const URL = process.env.COMPILE_SERVER_URL;
+    const URL = 'submission';
     const headers = {
       'content-type': 'application/json',
       'Content-Type': 'application/json',

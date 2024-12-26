@@ -18,30 +18,39 @@ export class ProblemService {
 
     @Inject(forwardRef(() => TestcaseService))
     private testcaseService: TestcaseService,
-  ) { }
+  ) {}
 
   public async findWithCategory(categoryName: CategoryList): Promise<any> {
-    let category: Category =
+    const category: Category =
       await this.categoryService.getCategory(categoryName);
 
     if (!category) {
       throw ErrorType.CATEGORY_NOT_FOUND();
     }
 
-    let problems = await this.problemRepository.find({
-      where: { category: category },
-    });
+    const problems = await this.problemRepository
+      .createQueryBuilder('problem')
+      .innerJoinAndSelect('problem.chapter', 'chapter')
+      .innerJoinAndSelect('chapter.category', 'category')
+      .where('category.category_name = :categoryName', {
+        categoryName: category.category_name,
+      })
+      .getMany();
 
     return {
       category: category.category_name,
       problems: problems.map((problem) => {
-        return { id: problem.id };
+        return {
+          id: problem.id,
+          title: problem.title,
+          chapter: problem.chapter.chapter_name,
+        };
       }),
     };
   }
 
   public async find(id: number): Promise<any> {
-    let [problem, count] = await this.problemRepository.findAndCount({
+    const [problem, count] = await this.problemRepository.findAndCount({
       where: { id: id },
     });
 

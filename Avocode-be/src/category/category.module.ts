@@ -17,11 +17,20 @@ import { UserModule } from '@user/user.module';
   imports: [
     forwardRef(() => ProblemModule),
     forwardRef(() => SubmissionModule),
-    UserModule,
-    TestcaseModule
+    forwardRef(() => UserModule),
+    TestcaseModule,
   ],
   controllers: [CategoryController],
-  providers: [CategoryService, CategoryRepository, ProblemService, ProblemRepository, SubmissionService, SubmissionRepository, TestcaseService, TestcaseRepository],
-  exports: [CategoryService, CategoryRepository]
+  providers: [
+    CategoryService,
+    CategoryRepository,
+    ProblemService,
+    ProblemRepository,
+    SubmissionService,
+    SubmissionRepository,
+    TestcaseService,
+    TestcaseRepository,
+  ],
+  exports: [CategoryService, CategoryRepository],
 })
-export class CategoryModule { }
+export class CategoryModule {}

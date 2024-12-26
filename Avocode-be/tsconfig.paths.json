@@ -1,31 +1,18 @@
 {
-    "compilerOptions": {
-        "baseUrl": "./",
-        "paths": {
-            "@common/*": [
-                "./src/common/*"
-            ],
-            "@user/*": [
-                "./src/user/*"
-            ],
-            "@auth/*": [
-                "./src/auth/*"
-            ],
-            "@category/*": [
-                "./src/category/*"
-            ],
-            "@problem/*": [
-                "./src/problem/*"
-            ],
-            "@submission/*": [
-                "./src/submission/*"
-            ],
-            "@testcase/*": [
-                "./src/testcase/*"
-            ],
-            "@root/*": [
-                "./src/*"
-            ],
-        }
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@common/*": ["./src/common/*"],
+      "@user/*": ["./src/user/*"],
+      "@auth/*": ["./src/auth/*"],
+      "@category/*": ["./src/category/*"],
+      "@problem/*": ["./src/problem/*"],
+      "@submission/*": ["./src/submission/*"],
+      "@testcase/*": ["./src/testcase/*"],
+      "@lecture/*": ["./src/lecture/*"],
+      "@chapter/*": ["./src/chapter/*"],
+      "@completedLecture/*": ["./src/completed-lecture/*"],
+      "@root/*": ["./src/*"]
     }
+  }
 }

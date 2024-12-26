@@ -1,0 +1,222 @@
+.container{
+    min-width: 1280px;
+    min-height: calc(100% - 60px);
+    background-color: #CEE6D5;
+}
+.container-items{
+    flex-direction: column;
+    max-width: 1280px !important;
+    background-color: #CEE6D5;
+}
+
+.course-navigation{
+    display: flex;
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    background-color: #fff;
+}
+
+.course-info{
+    border-right: 1px solid #e1e1e1;
+    flex-basis: 250px;
+}
+
+.course-info .course-name{
+    font-size: 1.75rem;
+    padding: 1rem 1.5rem;
+    font-weight: bolder;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.course-info .course-tab{
+    display: flex;
+}
+
+.course-tab li{
+    width: 50%;
+    text-align: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.course-tab li span{
+    display: inline-block;
+    color: #5C5C5C;
+    font-weight: 600;
+    padding: 1rem 0;
+}
+.course-tab li.active span{
+    border-bottom: 3px solid #333D54;
+    box-sizing: border-box;
+}
+
+.course-progress-container{
+    flex: 1;
+    padding: 2rem 2.5rem;
+}
+
+.course-progress-info{
+    color: #5C5C5C;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.course-progress-bar{
+
+}
+
+.course-progress-bar progress{
+    width: 70%;
+    appearance: none;
+    border-radius: 20px;
+}
+
+.course-progress-bar progress::-webkit-progress-value{
+    background-color: #333D54;
+    border-radius: 20px;
+}
+
+.course-progress-bar progress::-webkit-progress-bar{
+    background-color: #F1F1F1;
+    border-radius: 20px;
+}
+.course-progress-bar span{
+    display: inline-block;
+    color: #333D54;
+    font-size: 1.35rem;
+    font-weight: bolder;
+    padding-left: 0.75rem;
+}
+.course-list-container{
+    display: none;
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+}
+
+.course-list-container.active{
+    display: block;
+}
+
+.course-curriculum{
+    padding: 1rem 1.5rem;
+    font-weight: bold;
+    border-top: 1px solid #e1e1e1;
+    background-color: #ffffff;
+}
+.course-list{}
+.course-item{
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #fff;
+    border-top: 1px solid #e1e1e1;
+    cursor: pointer;
+}
+
+.course-list:last-child .course-item{
+    /* border: 0; */
+}
+.course-item .course-no{
+    color: #517738;
+    font-weight: bold;
+}
+.course-item .course-name{
+    flex: 1 1;
+    padding-left: 1.25rem;
+}
+.course-item .course-state{
+    font-size: 0.8rem;
+}
+
+.course-item .course-list-state{
+    padding-left: 0.625rem;
+}
+
+.course-list-state .state-angle{
+    display: inline-block;
+    color: #343434;
+    transition: 0.55s all;
+}
+
+.course-list-state .state-angle.active{
+    transform: rotate(-180deg);
+}
+.lecture-list{
+    height: auto;
+    max-height: 0px;
+    overflow: hidden;
+    background: #fafafa;
+    transition: 0.6s all;
+}
+
+.lecture-list.active{
+    height: auto;
+    max-height: 800px;
+}
+
+.lecture-item{
+    border-top: 1px solid #e1e1e1;
+}
+
+.lecture-item a{
+    display: block;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+}
+
+.lecture-item a:hover{
+    background-color: #efefef;
+}
+.lecture-item .lecture-info{
+    display: flex;
+    align-items: center;
+    font-size: .875rem;
+    color: #333;
+    width: 100%;
+}
+
+.lecture-info .lecture-type{
+    font-size: 1rem;
+    color: #888;
+}
+
+.lecture-info .lecture-name{
+    flex: 1 1;
+    padding-left: 1.25rem;
+}
+
+.lecture-info .lecture-date{
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #999;
+}
+
+.lecture-info .lecture-state{
+    font-size: 1rem;
+    padding-left: 0.625rem;
+}
+
+.course-information-container{
+    display: none;
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+}
+
+.course-information-container.active{
+    display: block;
+}
+
+.course-information{
+    padding: 1rem 1.5rem;
+    background-color: #fff;
+}

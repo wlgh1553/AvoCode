@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '@/assets/css/education/animation.module.css'
 import { motion } from 'framer-motion'
 
-function CodeContainer({ editorValue, nextExecPoint, prevExecPoint, execLine }) {
+function CodeContainer({ editorValue, increaseExecPoint, decreaseExecPoint, execLine }) {
     const addLineNumbers = (code) => {
         return code.split('\n').map((line, index) => (
             <React.Fragment key={index}>
@@ -24,10 +24,10 @@ function CodeContainer({ editorValue, nextExecPoint, prevExecPoint, execLine }) 
                 </pre>
             </div>
             <div className={styles['button-block']}>
-                <button className={styles['exec-button']} onClick={prevExecPoint}>
+                <button className={styles['exec-button']} onClick={decreaseExecPoint}>
                     prev
                 </button>
-                <button className={styles['exec-button']} onClick={nextExecPoint}>
+                <button className={styles['exec-button']} onClick={increaseExecPoint}>
                     next
                 </button>
             </div>

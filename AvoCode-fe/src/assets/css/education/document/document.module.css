@@ -1,0 +1,156 @@
+/* document.module.css */
+.container {
+    position: relative;
+    min-width: 1280px;
+    width: 100%;
+    height: calc(100% - 100px);
+}
+
+.container-items {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    overflow-y: auto;
+}
+
+.container-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    flex: 1;
+    position: relative;
+    height: 100%;
+}
+
+.lecture-explain-box {
+    width: 100%;
+    max-width: 750px;
+    color: #333333;
+    margin: 0 auto;
+    padding: 0 25px;
+    padding-bottom: 40px;
+    box-sizing: border-box;
+}
+
+.chapter-title {
+    font-family: "NotoSansKR-Medium-5", serif;
+    font-size: 0.9rem;
+    font-weight: thin;
+    margin: 0;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    color: #777;
+}
+
+.lecture-title {
+    font-family: "NotoSansKR-Medium-5", serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 0;
+    padding-bottom: 17px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.lecture-explain {
+    font-size: .9rem;
+    line-height: 1.8em;
+}
+
+/* 마크다운 스타일 추가 */
+.lecture-explain h1,
+.lecture-explain h2,
+.lecture-explain h3,
+.lecture-explain h4,
+.lecture-explain h5,
+.lecture-explain h6 {
+    font-family: "NotoSansKR-Medium-5", serif;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    color: #333333;
+}
+
+.lecture-explain h1 { font-size: 1.4rem; }
+.lecture-explain h2 { font-size: 1.3rem; }
+.lecture-explain h3 { font-size: 1.08rem; }
+
+.lecture-explain code {
+    background-color: #f6f8fa;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.lecture-explain pre {
+    margin: 1em 0;
+    padding: 1em;
+    overflow-x: auto;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.lecture-explain pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.lecture-explain ul,
+.lecture-explain ol {
+    padding-left: 1.5em;
+    margin: 1em 0;
+}
+
+.lecture-explain li {
+    margin: 0.5em 0;
+}
+
+.lecture-explain img {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.lecture-explain p {
+    margin: 0.8em 0;  /* 단락 간격 조정 */
+}
+
+/* 인라인 요소 스타일 */
+.lecture-explain strong {
+    font-weight: 600;
+}
+
+.lecture-explain em {
+    font-style: italic;
+}
+
+/* 링크 스타일 */
+.lecture-explain a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.lecture-explain a:hover {
+    text-decoration: underline;
+}
+
+/* 구분선 스타일 */
+.lecture-explain hr {
+    margin: 2em 0;
+    border: 0;
+    border-top: 1px solid #eaecef;
+}
+
+/* 블록 인용구 스타일 */
+.lecture-explain blockquote {
+    margin: 1em 0;
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+}
+
+
